@@ -46,9 +46,14 @@ def recuperer_gasoil(task_name, fifo_variable):
     if task_name == "Machine1" or task_name == "Machine2":
         if task_name == "Machine1":
             gasoil_in_tank = sum(fifo_variable) - 25
+            print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit un moteur")
             change_value_tank(fifo_variable,gasoil_in_tank)
+            global_stock_motors.append(1)
+            
         else:
             gasoil_in_tank = sum(fifo_variable) - 5
+            print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit une pneu")
+            global_stock_wheels.append(1)
             change_value_tank(fifo_variable,gasoil_in_tank)
 	
 
@@ -82,11 +87,15 @@ class my_task():
 		self.last_execution_time = datetime.datetime.now()
 
 		print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
-  
+    # Si dans le cas ou le tank est full
 	# Si dans le cas ou la tache est pump1 ou pump2
 		if (self.name == 'pump2' or self.name == 'pump1') :
 		# On va lancer la fonction pour stocker  du gasoil
 			stocker_gasoil(self.name,"tank", datetime.datetime.now().strftime("%H:%M:%S"), global_tank)
+	# Si dans le cas ou la tache est pump1 ou pump2
+		if (self.name == 'Machine1' or self.name == 'Machine2') :
+		# On va lancer la fonction pour recuperer du gasoil
+			recuperer_gasoil(self.name,"tank", datetime.datetime.now().strftime("%H:%M:%S"), global_tank)
 
 		time.sleep(self.execution_time)
 		print("\t" + self.name + " : S'arrête à  (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
@@ -116,8 +125,8 @@ if __name__ == '__main__':
 	task_list = []
 	task_list.append(my_task(name="pump1", priority = 1, period = 10, execution_time = 2, last_execution = last_execution))
 	task_list.append(my_task(name="pump2", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
-	#task_list.append(my_task(name="transmission_system", priority = 4, period = 60, execution_time = 20, last_execution = last_execution, stock_gasoil_tank = False))
-	#task_list.append(my_task(name="camera_analysis", priority = 2, period = 30, execution_time = 10, last_execution = last_execution, stock_gasoil_tank = False))
+	task_list.append(my_task(name="Machine1", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
+	task_list.append(my_task(name="Machine2", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
 
 # Notre boucle de l'application
 	while(1):

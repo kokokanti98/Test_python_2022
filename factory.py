@@ -87,7 +87,7 @@ class my_task():
 		print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
     # Changement des priorites
 		if (sum(global_tank) >= 50) :
-		    print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
+		    print("Changement des proprietes pump en low priority")
 	# Si dans le cas ou la tache est pump1 ou pump2
 		if (self.name == 'pump2' or self.name == 'pump1') :
 		# On va lancer la fonction pour stocker  du gasoil

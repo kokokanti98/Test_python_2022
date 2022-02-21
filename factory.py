@@ -46,15 +46,20 @@ def recuperer_gasoil(task_name, fifo_name, date_register_data, fifo_variable):
     if task_name == "Machine1" or task_name == "Machine2":
         if task_name == "Machine1":
             gasoil_in_tank = sum(fifo_variable) - 25
-            print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit un moteur")
-            change_value_tank(fifo_variable,gasoil_in_tank)
-            global_stock_motors.append(1)
+            # Si gasoil dans tank supérieur egale à 0
+            if(gasoil_in_tank>=0):
+                print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit un moteur")
+                change_value_tank(fifo_variable,gasoil_in_tank)
+                global_stock_motors.append(1)
+
             
         else:
             gasoil_in_tank = sum(fifo_variable) - 5
-            print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit une pneu")
-            global_stock_wheels.append(1)
-            change_value_tank(fifo_variable,gasoil_in_tank)
+            # Si gasoil dans tank supérieur egale à 0
+            if(gasoil_in_tank>=0):
+                print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit une pneu")
+                global_stock_wheels.append(1)
+                change_value_tank(fifo_variable,gasoil_in_tank)
 	
 
     
@@ -86,8 +91,42 @@ class my_task():
 		self.last_execution_time = datetime.datetime.now()
 		print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
     # Changement des priorites
+        # Si tank full 
 		if (sum(global_tank) >= 50) :
-		    print("Changement des proprietes pump en low priority")
+		    print("\tChangement des priorites des pump descend")
+            # Changement priorite de pump2 de 2 à 6
+		    if (self.name == 'pump2') :
+		        self.priority = 6
+            # Changement priorite de pump2 de 1 à 5 
+		    if (self.name == 'pump1') :
+		        self.priority = 5
+        # Si dans le cas sum(global_tank) inféreur à 50 donc tank non full
+		elif (sum(global_tank) < 50) :
+		    print("\tChangement des priorites des pump normale")
+            # Changement priorite de pump2 de 6 à 2
+		    if (self.name == 'pump2') :
+		        self.priority = 2
+            # Changement priorite de pump2 de 5 à 1
+		    if (self.name == 'pump1') :
+		        self.priority = 1
+        # Dans le cas ou Machine 1 a plus de priorite que Machine2
+		if ((sum(global_stock_wheels)/4) < sum(global_stock_motors)) :
+		    print("\tChangement des proprietes: Machine 1 avec supériorité de priorite")
+            # Changement priorite de Machine2 en 1
+		    if (self.name == 'Machine1') :
+		        self.priority = 1
+            # Changement priorite de Machine2 en 2
+		    if (self.name == 'Machine2') :
+		        self.priority = 2
+        # Dans le cas ou Machine 2 a plus de priorite que Machine1
+		if ((sum(global_stock_wheels)/4) > sum(global_stock_motors)) :
+		    print("\tChangement des proprietes: Machine 2 avec supériorité de priorite")
+            # Changement priorite de Machine2 en 2
+		    if (self.name == 'Machine1') :
+		        self.priority = 2
+            # Changement priorite de Machine2 en 1
+		    if (self.name == 'Machine2') :
+		        self.priority = 1
 	# Si dans le cas ou la tache est pump1 ou pump2
 		if (self.name == 'pump2' or self.name == 'pump1') :
 		# On va lancer la fonction pour stocker  du gasoil

@@ -41,7 +41,7 @@ def stocker_gasoil(task_name, fifo_name, date_register_data, fifo_variable):
 	
     
 # Fonction pour le message quand lorsqu une tâche lis des données dans le fifo concerne
-def recuperer_gasoil(task_name, fifo_variable):
+def recuperer_gasoil(task_name, fifo_name, date_register_data, fifo_variable):
     # Si machine 1 ou 2
     if task_name == "Machine1" or task_name == "Machine2":
         if task_name == "Machine1":
@@ -83,9 +83,7 @@ class my_task():
     	############################################################################
 	def run(self):
 	# MAJ last_execution_time
-		
 		self.last_execution_time = datetime.datetime.now()
-
 		print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
     # Si dans le cas ou le tank est full
 	# Si dans le cas ou la tache est pump1 ou pump2

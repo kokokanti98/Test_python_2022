@@ -123,8 +123,8 @@ if __name__ == '__main__':
 	task_list = []
 	task_list.append(my_task(name="pump1", priority = 1, period = 10, execution_time = 2, last_execution = last_execution))
 	task_list.append(my_task(name="pump2", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
-	task_list.append(my_task(name="Machine1", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
-	task_list.append(my_task(name="Machine2", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
+	task_list.append(my_task(name="Machine1", priority = 4, period = 10, execution_time = 2, last_execution = last_execution))
+	task_list.append(my_task(name="Machine2", priority = 3, period = 10, execution_time = 2, last_execution = last_execution))
 
 # Notre boucle de l'application
 	while(1):

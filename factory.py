@@ -51,6 +51,7 @@ def recuperer_gasoil(task_name, fifo_name, date_register_data, fifo_variable):
                 print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit un moteur")
                 change_value_tank(fifo_variable,gasoil_in_tank)
                 global_stock_motors.append(1)
+                print("\t Nb total des moteurs est:" + str(sum(global_stock_motors)))
 
             
         else:
@@ -60,6 +61,7 @@ def recuperer_gasoil(task_name, fifo_name, date_register_data, fifo_variable):
                 print("\t" + task_name + " : Recuperer du gasoil dans "+ fifo_name +" à (" + date_register_data + ") Construit une pneu")
                 global_stock_wheels.append(1)
                 change_value_tank(fifo_variable,gasoil_in_tank)
+                print("\t Nb total des pneu est:" + str(sum(global_stock_wheels)))
 	
 
     

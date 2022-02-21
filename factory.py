@@ -85,7 +85,18 @@ class my_task():
 	# MAJ last_execution_time
 		self.last_execution_time = datetime.datetime.now()
 		print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
-    # Si dans le cas ou le tank est full
+    # Changement des priorites
+	    # Si tank est full la priorite des pump change on leur donne moins de priorite
+		if (sum(global_tank) >= 50) :
+        # Si dans le cas ou la tache est pump1 ou pump2
+            if (self.name == 'pump2' or self.name == 'pump1') :
+                    if (self.name == 'pump2'):
+                        self.priority = 5
+                    else:
+                        self.priority = 6
+	    # Si tank est full la priorite des pump change on leur donne moins de priorite
+		if (sum(global_tank) >= 50) :
+		    print("\t" + self.name + " : Se déclenche à (" + self.last_execution_time.strftime("%H:%M:%S") + ")")
 	# Si dans le cas ou la tache est pump1 ou pump2
 		if (self.name == 'pump2' or self.name == 'pump1') :
 		# On va lancer la fonction pour stocker  du gasoil

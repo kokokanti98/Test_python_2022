@@ -1,1 +1,3 @@
-"# Test_python_2022" 
+# Test sous forme de TP en Python
+
+## Thème: Factory

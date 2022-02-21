@@ -5,11 +5,9 @@ import datetime
 
 
 ################################################################################
-#   Groupe 13 - Scheduleur EPSI
-	# KOKO Ambinintsoa Kantisambatra
-	# MENDY Marie Hélène 
-	# Yassine HEBBOUL
-	# Amine
+#   Etudiant en M1 à l'EPSI
+	# Nom: KOKO Ambinintsoa Kantisambatra
+ 	# Prenom: Ambinintsoa Kantisambatra
 ################################################################################
 # Fonction pour le message quand lorsqu une tâche enregistre des données dans le fifo concerne
 def message_register_fifo(task_name, fifo_name, date_register_data, fifo_variable):

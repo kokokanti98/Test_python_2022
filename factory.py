@@ -123,10 +123,10 @@ if __name__ == '__main__':
 	global_stock_motors = []
 # Instanciation des objets tâches
 	task_list = []
-	task_list.append(my_task(name="pump1", priority = 1, period = 10, execution_time = 2, last_execution = last_execution))
-	task_list.append(my_task(name="pump2", priority = 2, period = 10, execution_time = 2, last_execution = last_execution))
-	task_list.append(my_task(name="Machine1", priority = 4, period = 10, execution_time = 2, last_execution = last_execution))
-	task_list.append(my_task(name="Machine2", priority = 3, period = 10, execution_time = 2, last_execution = last_execution))
+	task_list.append(my_task(name="pump1", priority = 1, period = 5, execution_time = 2, last_execution = last_execution))
+	task_list.append(my_task(name="pump2", priority = 2, period = 15, execution_time = 3, last_execution = last_execution))
+	task_list.append(my_task(name="Machine1", priority = 4, period = 5, execution_time = 5, last_execution = last_execution))
+	task_list.append(my_task(name="Machine2", priority = 3, period = 5, execution_time = 3, last_execution = last_execution))
 
 # Notre boucle de l'application
 	while(1):
